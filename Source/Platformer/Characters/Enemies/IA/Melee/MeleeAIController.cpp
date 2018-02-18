@@ -53,9 +53,12 @@ void AMeleeAIController::Possess(APawn* InPawn)
 		CanAttackKeyID = BlackBoardComponent->GetKeyID("CanAttack");
 		BlackBoardComponent->SetValue<UBlackboardKeyType_Object>(CanAttackKeyID, false);
 
+<<<<<<< HEAD
+=======
 		CanAttackKeyID = BlackBoardComponent->GetKeyID("LocationToGo");
 		BlackBoardComponent->SetValue<UBlackboardKeyType_Object>(LocationToGoKeyID, false);
 
+>>>>>>> origin/master
 		// Initialise BehaviorComponent.
 		BehaviorComponent->StartTree(*melee->GetEnemyBehavior());
 	}

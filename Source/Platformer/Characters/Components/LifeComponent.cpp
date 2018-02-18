@@ -59,6 +59,16 @@ void ULifeComponent::DamageTaken(float DamageAttack,FVector ImpulseDirection)
 }
 
 
+<<<<<<< HEAD
+void ULifeComponent::ContinuousDamageTaken(float DamageAttack)
+{
+	if (imnune == false) {
+		Life -= DamageAttack;
+	}
+}
+
+=======
+>>>>>>> origin/master
 void ULifeComponent::heal(float health)
 {
 	Life += health;

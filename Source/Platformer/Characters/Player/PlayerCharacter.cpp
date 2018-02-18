@@ -192,11 +192,52 @@ void APlayerCharacter::addAmmo(int amount)
 	Ammo += amount;
 }
 
+<<<<<<< HEAD
+void APlayerCharacter::slowed(float time)
+{
+	Slowed = true;
+	SlowedTime = time;
+	CurrentSlowedTime = 0;
+	NormalSpeed = GetCharacterMovement()->MaxWalkSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = GetCharacterMovement()->MaxWalkSpeed / 4 * 3;
+}
+void APlayerCharacter::GetPoisoned(float time,float damage)
+{
+	mPoisoned = true;
+	PoisonTime = time;
+	CurrentPoisonTime = 0;
+	PoisonDamage = damage;
+}
+
+=======
+>>>>>>> origin/master
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 	ControlJumping();
+<<<<<<< HEAD
+	
+	if (mPoisoned) {
+		CurrentPoisonTime += DeltaTime;
+		if (CurrentPoisonTime > PoisonTime)
+		{
+			mPoisoned = false;
+		}
+		else {
+			mLife->ContinuousDamageTaken(PoisonDamage);
+		}
+	}
+	if (Slowed) {
+		CurrentSlowedTime += DeltaTime;
+		if (CurrentSlowedTime > SlowedTime)
+		{
+			Slowed = false;
+			GetCharacterMovement()->MaxWalkSpeed = NormalSpeed;
+		}
+	}
+=======
+>>>>>>> origin/master
 }
 
 void APlayerCharacter::MoveForward(float Value)

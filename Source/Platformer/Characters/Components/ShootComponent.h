@@ -34,6 +34,13 @@ public:
 		UArrowComponent* getDirection();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shoot")
 		TSubclassOf<ABullet> ClassType;
+<<<<<<< HEAD
+	void SetCoolDown(float const CoolDown);
+	float GetCoolDown() const;
+	void SetCurrentCoolDown(float const CoolDown);
+	float GetCurrentCoolDown() const;
+=======
+>>>>>>> origin/master
 private:
 	UPROPERTY(EditAnywhere, Category = "Shoot")
 		float Speed = 100;
@@ -43,6 +50,15 @@ private:
 		float LocationSpawn = 10.f;
 	FRotator SpawnRotation;
 	FVector SpawnLocation;
+<<<<<<< HEAD
+	UPROPERTY(EditAnywhere, Category = "Shoot")
+		float mCoolDown;
+	UPROPERTY(EditAnywhere, Category = "Shoot")
+		float mCurrentCoolDown;
+	UPROPERTY(EditAnywhere, Category = "Shoot")
+		bool mJustShoot;
+=======
+>>>>>>> origin/master
 
 	
 };
