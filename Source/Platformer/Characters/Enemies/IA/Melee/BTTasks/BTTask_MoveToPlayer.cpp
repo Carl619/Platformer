@@ -9,11 +9,10 @@
 #include "../MeleeAIController.h"
 #include "../../../../Player/PlayerCharacter.h"
 #include "../../../Melee/MeleeEnemy.h"
-<<<<<<< HEAD
+
 #include "../../../Shooter/ShooterEnemy.h"
 #include "../../Shooter/ShooterAIController.h"
-=======
->>>>>>> origin/master
+
 
 
 
@@ -23,8 +22,7 @@ EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& Ow
 
 	AMeleeAIController* enemyController = Cast<AMeleeAIController>(OwnerComp.GetAIOwner());
 
-<<<<<<< HEAD
-	
+
 
 	if (enemyController) {
 		APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(enemyController->TargetKeyID));
@@ -71,28 +69,6 @@ EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& Ow
 
 				return EBTNodeResult::Succeeded;
 			}
-=======
-	APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(enemyController->TargetKeyID));
-
-	if (IsValid(enemyController) && IsValid(player))
-	{
-
-		AMeleeEnemy* controlledPawn = Cast<AMeleeEnemy>(enemyController->GetPawn());
-
-		if (IsValid(controlledPawn))
-		{
-			if (OwnerComp.GetBlackboardComponent()->GetValueAsObject("Target") != nullptr)
-			{
-				if (player->GetUniqueID() != OwnerComp.GetBlackboardComponent()->GetValueAsObject("Target")->GetUniqueID())
-				{
-					enemyController->StopMovement();
-				}
-				
-				enemyController->MoveToActor(player, 5.f, true, true, true, 0, true);
-			}
-
-			return EBTNodeResult::Succeeded;
->>>>>>> origin/master
 		}
 	}
 

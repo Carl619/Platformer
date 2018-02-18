@@ -64,11 +64,10 @@ public:
 	void addFuel(float amount);
 	void addCollectible(int amount);
 	void addAmmo(int amount);
-<<<<<<< HEAD
+
 	void slowed(float time);
 	void GetPoisoned(float time, float damage);
-=======
->>>>>>> origin/master
+
 	virtual void Tick(float DeltaTime) override;
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -100,7 +99,7 @@ private:
 		UJetComponent * mJet;
 	UPROPERTY(EditAnywhere, Category = "Platformer")
 	UShootComponent*mShoot;
-<<<<<<< HEAD
+
 	UPROPERTY(EditAnywhere, Category = "Platformer")
 		bool mPoisoned = false;
 	UPROPERTY(EditAnywhere, Category = "Platformer")
@@ -117,6 +116,4 @@ private:
 		float PoisonDamage = 0;
 	UPROPERTY(EditAnywhere, Category = "Platformer")
 		float NormalSpeed;
-=======
->>>>>>> origin/master
 };

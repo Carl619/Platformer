@@ -11,11 +11,8 @@ UShootComponent::UShootComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 	Direction = CreateDefaultSubobject<UArrowComponent>(TEXT("ShootDirecion"));
-<<<<<<< HEAD
 	mCurrentCoolDown = 0;
 	mJustShoot = false;
-=======
->>>>>>> origin/master
 	// ...
 }
 
@@ -36,14 +33,13 @@ void UShootComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	SpawnLocation = GetOwner()->GetActorLocation() + Direction->GetForwardVector() * LocationSpawn;
-<<<<<<< HEAD
+
 	if (mJustShoot) {
 		mCurrentCoolDown += DeltaTime;
 		if (mCurrentCoolDown > mCoolDown)
 			mJustShoot = false;
 	}
-=======
->>>>>>> origin/master
+
 	// ...
 }
 
@@ -54,7 +50,7 @@ void UShootComponent::SetSpeed(float newSpeed)
 
 void UShootComponent::Shoot()
 {
-<<<<<<< HEAD
+
 	if (!mJustShoot) {
 		ABullet* bullet = (ABullet*)GetWorld()->SpawnActor(ClassType, &SpawnLocation, &SpawnRotation);
 		if (bullet) {
@@ -68,14 +64,7 @@ void UShootComponent::Shoot()
 				}
 			}
 		}
-=======
-	
-	ABullet* bullet = (ABullet*)GetWorld()->SpawnActor(ClassType, &SpawnLocation, &SpawnRotation);
-	if (bullet) {
-		bullet->SetCharaOwner(GetOwner());
-		bullet->SetDirection(Direction->GetForwardVector());
-		bullet->SetSpeed(Speed);
->>>>>>> origin/master
+
 	}
 }
 
@@ -83,7 +72,7 @@ UArrowComponent * UShootComponent::getDirection()
 {
 	return Direction;
 }
-<<<<<<< HEAD
+
 
 void UShootComponent::SetCoolDown(float const CoolDown)
 {
@@ -104,5 +93,4 @@ float UShootComponent::GetCurrentCoolDown() const
 {
 	return mCurrentCoolDown;
 }
-=======
->>>>>>> origin/master
+

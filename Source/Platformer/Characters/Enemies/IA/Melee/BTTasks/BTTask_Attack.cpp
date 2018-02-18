@@ -6,15 +6,12 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
 #include "../MeleeAIController.h"
-<<<<<<< HEAD
+
 #include "../../Shooter/ShooterAIController.h"
 #include "../../../../Player/PlayerCharacter.h"
 #include "../../../Melee/MeleeEnemy.h"
 #include "../../../Shooter/ShooterEnemy.h"
-=======
-#include "../../../../Player/PlayerCharacter.h"
-#include "../../../Melee/MeleeEnemy.h"
->>>>>>> origin/master
+
 #include "../../../../Components/LifeComponent.h"
 #include "../../../../Components/PunchComponent.h"
 
@@ -23,7 +20,6 @@ EBTNodeResult::Type UBTTask_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerCom
 {
 	AMeleeAIController* enemyController = Cast<AMeleeAIController>(OwnerComp.GetAIOwner());
 
-<<<<<<< HEAD
 	if (enemyController) {
 	APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(enemyController->TargetKeyID));
 
@@ -78,33 +74,6 @@ EBTNodeResult::Type UBTTask_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerCom
 				}
 			}
 		}
-=======
-	APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(enemyController->TargetKeyID));
-
-	if (IsValid(enemyController) && IsValid(player))
-	{
-
-		AMeleeEnemy* controlledPawn = Cast<AMeleeEnemy>(enemyController->GetPawn());
-
-	if (IsValid(controlledPawn))
-	{
-	ULifeComponent*   lifeComponent = player->FindComponentByClass<ULifeComponent>();
-	UPunchComponent* damageComponent = enemyController->GetPawn()->FindComponentByClass<UPunchComponent>();
-	float             distance = controlledPawn->GetDistanceTo(player);
-
-	if (IsValid(lifeComponent) && IsValid(damageComponent))
-	{	
-	if (distance <= controlledPawn->GetDistanceToAttack())
-	{
-		damageComponent->Punch();
-	}
-	else {
-		damageComponent->StopPunch();
-	}
-	return EBTNodeResult::Succeeded;
-	}
-	}
->>>>>>> origin/master
 	}
 	return EBTNodeResult::Failed;
 }

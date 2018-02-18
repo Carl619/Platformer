@@ -6,15 +6,10 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
 #include "../MeleeAIController.h"
-<<<<<<< HEAD
 #include "../../Shooter/ShooterAIController.h"
 #include "../../../../Player/PlayerCharacter.h"
 #include "../../../Melee/MeleeEnemy.h"
 #include "../../../Shooter/ShooterEnemy.h"
-=======
-#include "../../../../Player/PlayerCharacter.h"
-#include "../../../Melee/MeleeEnemy.h"
->>>>>>> origin/master
 #include "../../../../Components/PunchComponent.h"
 
 
@@ -29,7 +24,7 @@ void UBTService_TryToAttack::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 {
 	// Get the AMeleeAIController.
 	AMeleeAIController* enemyController = Cast<AMeleeAIController>(OwnerComp.GetAIOwner());
-<<<<<<< HEAD
+
 
 	if (enemyController) {
 	// Get the player.
@@ -64,15 +59,6 @@ void UBTService_TryToAttack::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 		{
 			// Get the enemy character.
 			AShooterEnemy* controlledPawn = Cast<AShooterEnemy>(ShooterController->GetPawn());
-=======
-	// Get the player.
-	APlayerCharacter*       player = Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
-
-	if (IsValid(enemyController) && IsValid(player))
-	{
-			// Get the enemy character.
-			AMeleeEnemy* controlledPawn = Cast<AMeleeEnemy>(enemyController->GetPawn());
->>>>>>> origin/master
 
 			if (IsValid(controlledPawn))
 			{
@@ -90,8 +76,7 @@ void UBTService_TryToAttack::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 				}
 			}
 		}
-<<<<<<< HEAD
+
 	}
-=======
->>>>>>> origin/master
+
 }

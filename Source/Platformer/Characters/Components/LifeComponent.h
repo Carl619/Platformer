@@ -27,12 +27,10 @@ public:
 	UFUNCTION()
 		void DamageTaken(float DamageAttack, FVector ImpulseDirection);
 
-<<<<<<< HEAD
+
 	UFUNCTION()
 		void ContinuousDamageTaken(float DamageAttack);
-=======
 
->>>>>>> origin/master
 	UFUNCTION()
 		void heal(float health);
 
