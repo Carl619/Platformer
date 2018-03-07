@@ -19,12 +19,10 @@
 
 EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-
+	// Get the AMeleeAIController.
 	AMeleeAIController* enemyController = Cast<AMeleeAIController>(OwnerComp.GetAIOwner());
-
-
-
 	if (enemyController) {
+		// Get the player.
 		APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(enemyController->TargetKeyID));
 		if (IsValid(enemyController) && IsValid(player))
 		{
@@ -35,12 +33,14 @@ EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& Ow
 			{
 				if (OwnerComp.GetBlackboardComponent()->GetValueAsObject("Target") != nullptr)
 				{
+					/*if the player isn't targeted the ai stop moving*/
 					if (player->GetUniqueID() != OwnerComp.GetBlackboardComponent()->GetValueAsObject("Target")->GetUniqueID())
 					{
 						enemyController->StopMovement();
 					}
-
-					enemyController->MoveToActor(player, 5.f, true, true, true, 0, true);
+					else {
+						enemyController->MoveToActor(player, 5.f, true, true, true, 0, true);
+					}
 				}
 
 				return EBTNodeResult::Succeeded;
@@ -48,7 +48,9 @@ EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& Ow
 		}
 	}
 	else {
+		// Get the AShooterAIController.
 		AShooterAIController* ShooterController = Cast<AShooterAIController>(OwnerComp.GetAIOwner());
+		// Get the player.
 		APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(ShooterController->TargetKeyID));
 		if (IsValid(ShooterController) && IsValid(player))
 		{
@@ -59,12 +61,14 @@ EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& Ow
 			{
 				if (OwnerComp.GetBlackboardComponent()->GetValueAsObject("Target") != nullptr)
 				{
+					/*if the player isn't targeted the ai stop moving*/
 					if (player->GetUniqueID() != OwnerComp.GetBlackboardComponent()->GetValueAsObject("Target")->GetUniqueID())
 					{
 						ShooterController->StopMovement();
 					}
-
-					ShooterController->MoveToActor(player, 5.f, true, true, true, 0, true);
+					else {
+						ShooterController->MoveToActor(player, 5.f, true, true, true, 0, true);
+					}
 				}
 
 				return EBTNodeResult::Succeeded;

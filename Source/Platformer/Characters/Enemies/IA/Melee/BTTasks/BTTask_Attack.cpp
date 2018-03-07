@@ -18,14 +18,16 @@
 
 EBTNodeResult::Type UBTTask_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
+	// Get the AMeleeAIController.
 	AMeleeAIController* enemyController = Cast<AMeleeAIController>(OwnerComp.GetAIOwner());
 
 	if (enemyController) {
-	APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(enemyController->TargetKeyID));
+		// Get the player.
+	APlayerCharacter*  player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(enemyController->TargetKeyID));
 
 		if (IsValid(enemyController) && IsValid(player))
 		{
-
+			// Get the enemy character.
 			AMeleeEnemy* controlledPawn = Cast<AMeleeEnemy>(enemyController->GetPawn());
 
 			if (IsValid(controlledPawn))
@@ -49,10 +51,13 @@ EBTNodeResult::Type UBTTask_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerCom
 		}
 	}
 	else {
+		// Get the AShooterAIController.
 		AShooterAIController* ShooterController = Cast<AShooterAIController>(OwnerComp.GetAIOwner());
+		// Get the player.
 		APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(ShooterController->TargetKeyID));
 		if (IsValid(ShooterController) && IsValid(player))
 		{
+			// Get the enemy character.
 			AShooterEnemy* controlledPawn = Cast<AShooterEnemy>(ShooterController->GetPawn());
 
 			if (IsValid(controlledPawn))

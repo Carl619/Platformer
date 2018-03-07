@@ -26,34 +26,47 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 
-	UFUNCTION()
-		void SetSpeed(float newSpeed);
+	/*Manages tha action of shoot and the craetion of the bullet*/
 	UFUNCTION()
 		void Shoot();
-	UFUNCTION(BlueprintCallable)
-		UArrowComponent* getDirection();
+
+	/*The class type of the bullet to shoot, used to create actors from blueprint bullets*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shoot")
 		TSubclassOf<ABullet> ClassType;
 
-	void SetCoolDown(float const CoolDown);
-	float GetCoolDown() const;
-	void SetCurrentCoolDown(float const CoolDown);
+	/******************************
+	***			Getters			***
+	*******************************/
+	UFUNCTION(BlueprintCallable)
+		UArrowComponent* getDirection();
 	float GetCurrentCoolDown() const;
+	float GetCoolDown() const;
+	/******************************
+	***			Setters			***
+	*******************************/
+	void SetCoolDown(float const CoolDown);
+	void SetCurrentCoolDown(float const CoolDown);
+	UFUNCTION()
+		void SetSpeed(float const newSpeed);
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Shoot")
 		float Speed = 100;
 	UPROPERTY(EditAnywhere, Category = "Shoot")
 		UArrowComponent* Direction;
+	/*The distance from the arrow direction and how much we want the offset of the spawn of the bullet*/
 	UPROPERTY(EditAnywhere, Category = "Shoot")
 		float LocationSpawn = 10.f;
+	/*Location of the bullet spawned*/
 	FRotator SpawnRotation;
 	FVector SpawnLocation;
-
+	/*The minimum time between each shoot*/
 	UPROPERTY(EditAnywhere, Category = "Shoot")
 		float mCoolDown;
+	/*The current time to wait*/
 	UPROPERTY(EditAnywhere, Category = "Shoot")
 		float mCurrentCoolDown;
+	/*boolean to know we recently shoot and have to wait for shooting again*/
 	UPROPERTY(EditAnywhere, Category = "Shoot")
 		bool mJustShoot;
 	

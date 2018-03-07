@@ -34,15 +34,12 @@ void UJetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 
 	/*This bool makes sure that the jet pack only is active when the user wants*/
 	if (propelling) {
-		TArray<UCharacterMovementComponent*> Comps;
 
 		ACharacter * chara = Cast<ACharacter>(GetOwner());
-		chara->GetComponents(Comps);
-		if (Comps.Num() > 0)
+		UCharacterMovementComponent* moveComponent = chara->FindComponentByClass<UCharacterMovementComponent>();
+		if (moveComponent)
 		{
-			/*The jetpack unlike the jumps is used continously*/
-			UCharacterMovementComponent* FoundComp = Comps[0];
-			FoundComp->AddForce(FVector(0, 0, ForceZJet*FoundComp->Mass));
+			moveComponent->AddForce(FVector(0, 0, ForceZJet*moveComponent->Mass));
 			JetFuel = JetFuel - FuelLost*DeltaTime;
 			if (JetFuel < 0)
 				JetFuel = 0;

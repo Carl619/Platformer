@@ -18,7 +18,7 @@ ATreasureBlock::ATreasureBlock()
 
 void ATreasureBlock::reward(APlayerCharacter * player)
 {
-	TArray<ULifeComponent*> Comps;
+	ULifeComponent*   lifeComponent;
 	if (!rewarded) {
 		switch (objectType)
 		{
@@ -29,19 +29,19 @@ void ATreasureBlock::reward(APlayerCharacter * player)
 			player->addFuel(100);
 			break;
 		case 2:
-			player->GetComponents(Comps);
-			if (Comps.Num() > 0)
+			lifeComponent = player->FindComponentByClass<ULifeComponent>();
+			if (lifeComponent)
 			{
-				Comps[0]->heal(10);
+				lifeComponent->heal(10);
 			}
 			break;
 		case 3:
 			player->addAmmo(10);
 		case 4:
-			player->GetComponents(Comps);
-			if (Comps.Num() > 0)
+			lifeComponent = player->FindComponentByClass<ULifeComponent>();
+			if (lifeComponent)
 			{
-				Comps[0]->becomeImmune();
+				lifeComponent->becomeImmune();
 			}
 			break;
 		default:

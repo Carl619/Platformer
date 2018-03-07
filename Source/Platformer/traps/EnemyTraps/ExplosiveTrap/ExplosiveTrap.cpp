@@ -19,11 +19,10 @@ void AExplosiveTrap::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor
 	{
 		ABaseThirdPersonCharacter * chara = Cast<ABaseThirdPersonCharacter>(OtherActor);
 		if (chara) {
-			TArray<ULifeComponent*> Comps;
-			chara->GetComponents(Comps);
-			if (Comps.Num() > 0)
+			ULifeComponent*   lifeComponent = chara->FindComponentByClass<ULifeComponent>();
+			if (lifeComponent)
 			{
-				Comps[0]->DamageTaken(mDamage, FVector::ZeroVector);
+				lifeComponent->DamageTaken(mDamage, FVector::ZeroVector);
 				Destroy();
 			}
 		}

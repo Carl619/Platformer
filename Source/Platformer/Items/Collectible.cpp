@@ -41,7 +41,7 @@ void ACollectible::BeginPlay()
 void ACollectible::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	this->AddActorLocalRotation(FRotator(0,0,rotationSpeed)*DeltaTime);
+	this->AddActorLocalRotation(FRotator(0, rotationSpeed,0)*DeltaTime);
 
 
 }

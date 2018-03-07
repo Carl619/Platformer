@@ -45,7 +45,7 @@ private:
 		UBehaviorTree*           mEnemyBehavior;
 	UPROPERTY(EditAnywhere, Category = "Platformer|Traps")
 		UTrapComponent*           mTrapComponent;
-	
+	/*Sensing component to detect the player*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|IA")
 		UPawnSensingComponent*           mPawnSensingComponent;
 	UPROPERTY(EditAnywhere, Category = "Platformer|Traps")
@@ -55,10 +55,13 @@ private:
 	/** Max distance to do an effective attack. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platformer|Attack", Meta = (AllowPrivateAccess = true), meta = (DisplayName = "DistanceToAttack"))
 		float                    mDistanceToAttack;
+	/*cool down to deploy traps*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|Traps")
 		float mCoolDown;
+	/*current time of cooling*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|Traps")
 		float mCurrentCoolDown;
+	/*trap deployed*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|Traps")
 		ABaseTrap* TrapDeployed = nullptr;
 };

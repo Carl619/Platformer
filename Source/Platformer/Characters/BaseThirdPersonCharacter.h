@@ -36,7 +36,7 @@ public:
 
 	UFUNCTION()
 		virtual void Tick(float DeltaTime) override;
-
+	/*getters*/
 	UFUNCTION(BlueprintCallable)
 		UPunchComponent  * getPunch();
 

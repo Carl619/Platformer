@@ -37,33 +37,37 @@ public:
 	UFUNCTION()
 		FVector punchDirection();
 	UFUNCTION()
+		void Punch();
+	UFUNCTION()
+		void StopPunch();
+	/******************************
+	***			Getters			***
+	*******************************/
+	UFUNCTION()
 		float getDamage();
 
 	UFUNCTION(BlueprintCallable)
 		bool getisPunching();
-
-	UFUNCTION(BlueprintCallable)
-		void setIsPunching(bool punching);
-	UFUNCTION()
-		void Punch();
-	UFUNCTION()
-		void StopPunch();
 	UFUNCTION(BlueprintCallable)
 		USphereComponent * getLeftHandCollision();
 	UFUNCTION(BlueprintCallable)
 		USphereComponent * getRightHandCollision();
-
+	/******************************
+	***			Setters			***
+	*******************************/
+	UFUNCTION(BlueprintCallable)
+		void setIsPunching(bool punching);
 
 		
 private:
 	UPROPERTY(EditAnywhere, Category = "DamageSystem")
 		USphereComponent * LeftHandCollision;
-
 	UPROPERTY(EditAnywhere, Category = "DamageSystem")
 		USphereComponent * RightHandCollision;
-
+	/*THe damage the punch will make*/
 	UPROPERTY(EditAnywhere, Category = "DamageSystem")
 		float Damage = 20;
+	/*The direction the attacked actor will move*/
 	UPROPERTY(EditAnywhere, Category = "DamageSystem")
 		UArrowComponent* DamageImpulseDirection;
 	UPROPERTY(EditAnywhere, Category = "DamageSystem")
@@ -72,5 +76,6 @@ private:
 		float waitForNextPunch = 0;
 	UPROPERTY(EditAnywhere, Category = "DamageSystem")
 		bool canPunch = true;
+	UPROPERTY(EditAnywhere, Category = "DamageSystem")
 		float currentWaitForNextPunch = 0;
 };

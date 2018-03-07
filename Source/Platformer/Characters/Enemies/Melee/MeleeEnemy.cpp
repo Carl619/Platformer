@@ -7,6 +7,7 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
 #include "Engine/TargetPoint.h"
 #include "../../Components/PunchComponent.h"
+#include "../../Components/LifeComponent.h"
 #include "../IA/Melee/MeleeAIController.h"
 #include "../../Player/PlayerCharacter.h"
 

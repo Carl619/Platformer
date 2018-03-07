@@ -125,9 +125,12 @@ UShootComponent * APlayerCharacter::getShoot()
 
 void APlayerCharacter::Jump()
 {
+	/*first see if the player is going to use the jet or not*/
 	if (UsingJetPack && mJet->getFuel()>0)
 		mJet->setPropelling(true);
+	/*it enables the collision box to hit the blocks*/
 	JumpHit->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	/*the player can only jump twice until he touches the land*/
 	if (NumberJumps < 2) {
 		if(NumberJumps==0)
 		ACharacter::Jump();

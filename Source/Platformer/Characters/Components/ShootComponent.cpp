@@ -33,37 +33,37 @@ void UShootComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	SpawnLocation = GetOwner()->GetActorLocation() + Direction->GetForwardVector() * LocationSpawn;
-
+	/*If he just shoot each tick will update the cool down to wait for the next shoot*/
 	if (mJustShoot) {
 		mCurrentCoolDown += DeltaTime;
-		if (mCurrentCoolDown > mCoolDown)
+		if (mCurrentCoolDown > mCoolDown) {
 			mJustShoot = false;
+			mCurrentCoolDown = 0;
+		}
 	}
 
 	// ...
 }
 
-void UShootComponent::SetSpeed(float newSpeed)
+void UShootComponent::SetSpeed(float const newSpeed)
 {
 	Speed = newSpeed;
 }
 
 void UShootComponent::Shoot()
 {
-
+	/*If the owner have to wait for each shoot the boolean mJustShoot will decide if the onwer can shoot*/
 	if (!mJustShoot) {
+		/*There is a possibility that the bullet that is created is inmiedately destroyed because the target is too near so the bullet is destroyed at the moment of creation and the shooter thinks it wasn't created*/
 		ABullet* bullet = (ABullet*)GetWorld()->SpawnActor(ClassType, &SpawnLocation, &SpawnRotation);
-		if (bullet) {
-			if (mJustShoot == false) {
+				mJustShoot = true;
+				mCurrentCoolDown = 0;	
+				if (bullet) {
+				/*creation of the bullet*/
 				bullet->SetCharaOwner(GetOwner());
 				bullet->SetDirection(Direction->GetForwardVector());
 				bullet->SetSpeed(Speed);
-				if (mCoolDown > 0) {
-					mJustShoot = true;
-					mCurrentCoolDown = 0;
-				}
 			}
-		}
 
 	}
 }

@@ -24,10 +24,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	/*getters*/
 	UFUNCTION()
 		TArray<TSubclassOf<ABaseTrap>> GetTrapType();
+	/*THe array fo different type of trap that the owner can use.*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Trap")
 		TArray<TSubclassOf<ABaseTrap>> TrapType;
+	/*creation of the trap, we know what trap will be spawned and where*/
 	ABaseTrap* MakeATrap(int index, FVector TargetLocation);
 private:
 	FRotator SpawnRotation;

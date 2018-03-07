@@ -39,13 +39,12 @@ void AFireBallTrap::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor 
 	{
 		ABaseThirdPersonCharacter * chara = Cast<ABaseThirdPersonCharacter>(OtherActor);
 		if (chara) {
-				TArray<ULifeComponent*> Comps;
-				chara->GetComponents(Comps);
-				if (Comps.Num() > 0)
-				{
-					Comps[0]->DamageTaken(Damage, FVector::ZeroVector);
-					Destroy();
-				}
+			ULifeComponent*   lifeComponent = chara->FindComponentByClass<ULifeComponent>();
+			if (lifeComponent)
+			{
+				lifeComponent->DamageTaken(Damage, FVector::ZeroVector);
+				Destroy();
+			}
 			}
 	}
 }

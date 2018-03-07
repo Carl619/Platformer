@@ -39,6 +39,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Platformer")
 		float rotationSpeed = 100;
+	/*fuel that the item gives*/
 	UPROPERTY(EditAnywhere, Category = "Platformer")
 		float fuel = 100;
 

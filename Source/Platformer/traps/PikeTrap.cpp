@@ -39,11 +39,10 @@ void APikeTrap::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * Ot
 	{
 		ABaseThirdPersonCharacter * chara = Cast<ABaseThirdPersonCharacter>(OtherActor);
 		if (chara) {
-			TArray<ULifeComponent*> Comps;
-			chara->GetComponents(Comps);
-			if (Comps.Num() > 0)
+			ULifeComponent*   lifeComponent = chara->FindComponentByClass<ULifeComponent>();
+			if (lifeComponent)
 			{
-				Comps[0]->DamageTaken(Damage, FVector::ZeroVector);
+				lifeComponent->DamageTaken(Damage, FVector::ZeroVector);
 			}
 		}
 	}

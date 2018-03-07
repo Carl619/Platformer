@@ -41,6 +41,7 @@ public:
 	/*The collision box for making an impulse in the actor to make it float*/
 	UPROPERTY(EditAnywhere)
 		UBoxComponent* ExitCollision;
+	/*portal connected to this one and be teleported*/
 	UPROPERTY(EditAnywhere)
 	APortal* connectedPortal;
 	

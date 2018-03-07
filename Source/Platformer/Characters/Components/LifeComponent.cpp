@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "../Player/PlayerCharacter.h"
 
 
 
@@ -32,8 +33,11 @@ void ULifeComponent::BeginPlay()
 void ULifeComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (Life <= 0) {
-		GetOwner()->Destroy();
+	APlayerCharacter * player = Cast<APlayerCharacter>(GetOwner());
+	if (!player) {
+		if (Life <= 0) {
+			GetOwner()->Destroy();
+		}
 	}
 
 	BeingImmune(DeltaTime);
@@ -43,16 +47,15 @@ void ULifeComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 void ULifeComponent::DamageTaken(float DamageAttack,FVector ImpulseDirection)
 {
 	if (imnune == false) {
+		/*Each attack the owner receives he will be impulsed in the attacker direction, 
+		or if there is no direction will be a jump.*/
 		Life -= DamageAttack;
-		TArray<UCharacterMovementComponent*> Comps;
-
 		ACharacter * chara = Cast<ACharacter>(GetOwner());
-		chara->GetComponents(Comps);
-		if (Comps.Num() > 0)
+		UCharacterMovementComponent* moveComponent = GetOwner()->FindComponentByClass<UCharacterMovementComponent>();
+		if (moveComponent)
 		{
-			UCharacterMovementComponent* FoundComp = Comps[0];
 			FVector LaunchDirection = ImpulseDirection + FVector(0, 0, 0.5);
-			LaunchDirection *= (FoundComp->Mass*ImpulseDamageMultiplier);
+			LaunchDirection *= (moveComponent->Mass*ImpulseDamageMultiplier);
 			chara->LaunchCharacter(LaunchDirection, true, true);
 		}
 	}

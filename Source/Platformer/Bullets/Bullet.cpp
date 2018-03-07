@@ -61,33 +61,33 @@ void ABullet::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * Othe
 {
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
 	{
-		ABaseThirdPersonCharacter * chara = Cast<ABaseThirdPersonCharacter>(OtherActor);
-		if (chara) {
-			/*I have to make sure the bullet doesn't damage the creater ofthe bullet, because it can make the bullet ot be destroyed at the begining*/
-			if (chara != OwnerCharacter) {
-				TArray<ULifeComponent*> Comps;
-				chara->GetComponents(Comps);
-				if (Comps.Num() > 0)
-				{
-					Comps[0]->DamageTaken(Damage, FVector::ZeroVector);
-					Destroy();
+		if (!IsPendingKill()) {
+			ABaseThirdPersonCharacter * chara = Cast<ABaseThirdPersonCharacter>(OtherActor);
+			if (chara) {
+				/*I have to make sure the bullet doesn't damage the creater ofthe bullet, because it can make the bullet ot be destroyed at the begining*/
+				if (chara != OwnerCharacter) {
+					ULifeComponent*   lifeComponent = chara->FindComponentByClass<ULifeComponent>();
+					if (lifeComponent)
+					{
+						lifeComponent->DamageTaken(Damage, FVector::ZeroVector);
+						Destroy();
+					}
 				}
-			}
-
-		}
-		else {
-			/*Bullets don't destroy between them*/
-			ABullet * bull = Cast<ABullet>(OtherActor);
-			if (bull) {
 
 			}
 			else {
-				/*Anything else destroy the bullet*/
-				Destroy();
+				/*Bullets don't destroy between them*/
+				ABullet * bull = Cast<ABullet>(OtherActor);
+				if (bull) {
+
+				}
+				else {
+					/*Anything else destroy the bullet*/
+					Destroy();
+				}
 			}
 		}
-	}
 
-	
+	}
 }
 

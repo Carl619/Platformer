@@ -37,7 +37,7 @@ void UBTService_TryToAttack::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 			if (IsValid(controlledPawn))
 			{
 				float distance = controlledPawn->GetDistanceTo(player);
-
+				/*if distance is less small enough he can prepare to punch*/
 				if (distance <= controlledPawn->GetDistanceToAttack())
 				{
 					OwnerComp.GetBlackboardComponent()->SetValueAsBool("CanAttack", true);
@@ -52,7 +52,7 @@ void UBTService_TryToAttack::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 		}
 	}
 	else {
-		// Get the AMeleeAIController.
+		// Get the AShooterAIController.
 		AShooterAIController* ShooterController = Cast<AShooterAIController>(OwnerComp.GetAIOwner());
 		APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(ShooterController->TargetKeyID));
 		if (IsValid(ShooterController) && IsValid(player))
@@ -63,7 +63,7 @@ void UBTService_TryToAttack::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 			if (IsValid(controlledPawn))
 			{
 				float distance = controlledPawn->GetDistanceTo(player);
-
+				/*if distance is less small enough he can prepare to punch*/
 				if (distance <= controlledPawn->GetDistanceToAttack())
 				{
 					OwnerComp.GetBlackboardComponent()->SetValueAsBool("CanAttack", true);

@@ -32,9 +32,10 @@ public:
 private:
 
 
-	/*The collsion box that when an actor collides, it will be propelled*/
+	/*The collsion box that tells the missiles to attack*/
 	UPROPERTY(EditAnywhere)
 		UBoxComponent* EnterZone;
+	/*the missiles associated to the zone*/
 	UPROPERTY(EditAnywhere)
 	TArray<AMissileTrap*> missiles;
 	

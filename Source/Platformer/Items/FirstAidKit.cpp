@@ -38,13 +38,12 @@ void AFirstAidKit::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor *
 	{
 		ABaseThirdPersonCharacter * chara = Cast<ABaseThirdPersonCharacter>(OtherActor);
 		if (chara) {
-				TArray<ULifeComponent*> Comps;
-				chara->GetComponents(Comps);
-				if (Comps.Num() > 0)
-				{
-					Comps[0]->heal(life);
-					Destroy();
-				}
+			ULifeComponent*   lifeComponent = chara->FindComponentByClass<ULifeComponent>();
+			if (lifeComponent)
+			{
+				lifeComponent->heal(life);
+				Destroy();
+			}
 			}
 	}
 }

@@ -2,6 +2,7 @@
 
 #include "DeathFloor.h"
 #include "../Characters/BaseThirdPersonCharacter.h"
+#include "../Characters/Components/LifeComponent.h"
 
 // Sets default values
 ADeathFloor::ADeathFloor()
@@ -37,7 +38,9 @@ void ADeathFloor::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor * 
 	{
 		ABaseThirdPersonCharacter * player = Cast<ABaseThirdPersonCharacter>(OtherActor);
 		if (player) {
-			player->Destroy();
+			ULifeComponent* lifeComponent = player->FindComponentByClass<ULifeComponent>();
+			if(lifeComponent)
+				lifeComponent->DamageTaken(1000, FVector::ZeroVector);
 		}
 	}
 }

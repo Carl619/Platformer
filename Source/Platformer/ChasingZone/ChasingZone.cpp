@@ -33,6 +33,7 @@ void AChasingZone::OnOverlapBegin(UPrimitiveComponent * OverlappedComp, AActor *
 	{
 		APlayerCharacter * player = Cast<APlayerCharacter>(OtherActor);
 		if (player) {
+			/*when the players enters warns all the missiles to star attacking*/
 			for (int i = 0; i < missiles.Num(); i++) {
 				if (missiles[i]->IsValidLowLevel()) {
 					missiles[i]->HomingMissile(player);

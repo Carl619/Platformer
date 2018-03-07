@@ -40,10 +40,10 @@ private:
 	/*The collsion box that when an actor collides, it will be propelled*/
 	UPROPERTY(EditAnywhere)
 		UBoxComponent* EnterCollision;
-
+	/*direction to be impulsed*/
 	UPROPERTY(EditAnywhere)
 		UArrowComponent* ImpulseDirection;
-
+	/*imoulse given to player*/
 	UPROPERTY(EditAnywhere, Category = "Platformer")
 		float impulse = 0;
 	

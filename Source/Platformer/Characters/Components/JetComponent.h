@@ -24,16 +24,23 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	/******************************
+	***			Setters			***
+	*******************************/
 	void setForceZget(float force);
 	void setJetFuel(float fuel);
-	UFUNCTION(BlueprintCallable)
+	void setFuelLost(float fuel);
+	void setPropelling(bool pro);
+	/******************************
+	***			Getters			***
+	*******************************/
+		UFUNCTION(BlueprintCallable)
 		float getMaxFuel();
 	UFUNCTION(BlueprintCallable)
 	float getFuel();
-	void setFuelLost(float fuel);
-	void addFuel(float FuelAmmount);
 	bool getPropelling();
-	void setPropelling(bool pro);
+	/*Add more fuel*/
+	void addFuel(float FuelAmmount);
 
 
 private:

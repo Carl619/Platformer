@@ -39,6 +39,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Platformer")
 		float rotationSpeed = 100;
+	/*life the item gives*/
 	UPROPERTY(EditAnywhere, Category = "Platformer")
 		float life = 100;
 

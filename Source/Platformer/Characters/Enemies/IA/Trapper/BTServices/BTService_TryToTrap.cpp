@@ -21,7 +21,7 @@ UBTService_TryToTrap::UBTService_TryToTrap()
 
 void UBTService_TryToTrap::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
-	// Get the AMeleeAIController.
+	// Get the ATrapperAIController.
 	ATrapperAIController* enemyController = Cast<ATrapperAIController>(OwnerComp.GetAIOwner());
 	// Get the player.
 	APlayerCharacter*       player = Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());

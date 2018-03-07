@@ -32,6 +32,7 @@ private:
 		UStaticMeshComponent * Body;
 	UPROPERTY(EditAnywhere)
 		USphereComponent * SphereCollision;
+	/*damage of the trap*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|Damage")
 		float Damage = 10;
 };

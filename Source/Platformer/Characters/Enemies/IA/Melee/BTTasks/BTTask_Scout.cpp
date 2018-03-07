@@ -19,7 +19,9 @@
 
 EBTNodeResult::Type UBTTask_Scout::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
+	// Get the AMeleeAIController.
 	AMeleeAIController* enemyController = Cast<AMeleeAIController>(OwnerComp.GetAIOwner());
+	// Get the player.
 	APlayerCharacter*       player = Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
 	if (enemyController) {
@@ -30,12 +32,14 @@ EBTNodeResult::Type UBTTask_Scout::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 
 			if (IsValid(controlledPawn))
 			{
+				/*get array of points to patrol*/
 				TArray<ATargetPoint*> TargetPoints = controlledPawn->getTargetPoints();
 
 				if (TargetPoints.Num() > 0)
 				{
+					/*the ai goes around all the points in a sequence and begins again*/
 					enemyController->MoveToActor(TargetPoints[controlledPawn->GetCurrentTargetPoint()], 5.f, true, true, true, 0, true);
-
+					/*when it is near enough the ai changes the point to go*/
 					if (controlledPawn->GetDistanceTo(TargetPoints[controlledPawn->GetCurrentTargetPoint()]) < 120)
 					{
 						controlledPawn->SetCurrentTargetPoint(controlledPawn->GetCurrentTargetPoint() + 1);
@@ -50,20 +54,24 @@ EBTNodeResult::Type UBTTask_Scout::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 		}
 	}
 	else {
+		// Get the AShooterAIController.
 		AShooterAIController* ShooterController = Cast<AShooterAIController>(OwnerComp.GetAIOwner());
-		UBlackboardComponent*blackboard = ShooterController->GetBlackboardComponent();
+		
 		if (IsValid(ShooterController) && IsValid(player))
 		{
+			UBlackboardComponent*blackboard = ShooterController->GetBlackboardComponent();
 			AShooterEnemy* controlledPawn = Cast<AShooterEnemy>(ShooterController->GetPawn());
 
 			if (IsValid(controlledPawn))
 			{
+				/*get array of points to patrol*/
 				TArray<ATargetPoint*> TargetPoints = controlledPawn->getTargetPoints();
 
 				if (TargetPoints.Num() > 0)
 				{
+					/*the ai goes around all the points in a sequence and begins again*/
 					ShooterController->MoveToActor(TargetPoints[controlledPawn->GetCurrentTargetPoint()], 5.f, true, true, true, 0, true);
-
+					/*when it is near enough the ai changes the point to go*/
 					if (controlledPawn->GetDistanceTo(TargetPoints[controlledPawn->GetCurrentTargetPoint()]) < 120)
 					{
 						controlledPawn->SetCurrentTargetPoint(controlledPawn->GetCurrentTargetPoint() + 1);

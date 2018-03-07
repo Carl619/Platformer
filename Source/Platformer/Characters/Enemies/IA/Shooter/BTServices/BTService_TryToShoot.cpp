@@ -34,7 +34,7 @@ void UBTService_TryToShoot::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* N
 		if (IsValid(controlledPawn))
 		{
 			float distance = controlledPawn->GetDistanceTo(player);
-
+			/*if distance is less small enough he can prepare to shoot*/
 			if (distance <= controlledPawn->GetDistanceToShoot())
 			{
 				OwnerComp.GetBlackboardComponent()->SetValueAsBool("CanShoot", true);

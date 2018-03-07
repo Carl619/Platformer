@@ -15,13 +15,14 @@
 
 EBTNodeResult::Type UBTTask_Shoot::ExecuteTask(UBehaviorTreeComponent & OwnerComp, uint8 * NodeMemory)
 {
+	// Get the AShooterAIController.
 	AShooterAIController* enemyController = Cast<AShooterAIController>(OwnerComp.GetAIOwner());
-
+	// Get the player.
 	APlayerCharacter*       player = Cast<APlayerCharacter>(OwnerComp.GetBlackboardComponent()->GetValue<UBlackboardKeyType_Object>(enemyController->TargetKeyID));
 
 	if (IsValid(enemyController) && IsValid(player))
 	{
-
+		// Get the enemy character.
 		AShooterEnemy* controlledPawn = Cast<AShooterEnemy>(enemyController->GetPawn());
 
 		if (IsValid(controlledPawn))
@@ -32,6 +33,7 @@ EBTNodeResult::Type UBTTask_Shoot::ExecuteTask(UBehaviorTreeComponent & OwnerCom
 
 			if (IsValid(lifeComponent) && IsValid(damageComponent))
 			{
+				/*checks if the player is near enough to shoot*/
 				if (distance <= controlledPawn->GetDistanceToShoot())
 				{
 					damageComponent->Shoot();

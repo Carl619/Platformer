@@ -23,17 +23,17 @@ void ASplinePath::BeginPlay()
 void ASplinePath::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	FVector NewPosition = FMath::Lerp<FVector>(mSplinePath->GetLocationAtSplinePoint(0, ESplineCoordinateSpace::World), mSplinePath->GetLocationAtSplinePoint(mSplinePath->GetNumberOfSplinePoints() - 1, ESplineCoordinateSpace::World), path);
-	/*When path is near of a extreme I change the orient of the object*/
-	if (path > 0.95) {
-		pathSide = -1;
+	if (trap) {
+		FVector NewPosition = FMath::Lerp<FVector>(mSplinePath->GetLocationAtSplinePoint(0, ESplineCoordinateSpace::World), mSplinePath->GetLocationAtSplinePoint(mSplinePath->GetNumberOfSplinePoints() - 1, ESplineCoordinateSpace::World), path);
+		/*When path is near of a extreme I change the orient of the object*/
+		if (path > 0.95) {
+			pathSide = -1;
+		}
+		else if (path < 0.05) {
+			pathSide = 1;
+		}
+		path += speed*DeltaTime*pathSide;
+		trap->SetActorLocation(NewPosition);
 	}
-	else if (path < 0.05) {
-		pathSide = 1;
-	}
-	path += speed*DeltaTime*pathSide;
-	trap->SetActorLocation(NewPosition);
-
 }
 

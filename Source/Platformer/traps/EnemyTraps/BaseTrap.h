@@ -23,6 +23,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	/*Checks te remaining time the trap can be actived*/
 	UFUNCTION()
 		void CheckLife(float Time);
 
@@ -31,12 +32,16 @@ protected:
 		UStaticMeshComponent * Body;
 	UPROPERTY(EditAnywhere, Category = "Trap")
 		UBoxComponent * BoxCollision;
+	/*time the trap exists*/
 	UPROPERTY(EditAnywhere, Category = "Trap")
 	float mLifeTime;
+	/*current time the trap is existing*/
 	UPROPERTY(EditAnywhere, Category = "Trap")
 	float mCurrentTime;
+	/*the damage the trap can give*/
 	UPROPERTY(EditAnywhere, Category = "Trap")
 		float mDamage;
+	/*the time the trap deals damage*/
 	UPROPERTY(EditAnywhere, Category = "Trap")
 		float mTimeDoingDamage;
 };

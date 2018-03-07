@@ -24,7 +24,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+/******************************
+***			Setters			***
+*******************************/
 	UFUNCTION()
 		void SetDirection(FVector newDirection);
 	UFUNCTION()
@@ -50,6 +52,7 @@ private:
 	/*The damage the bullet deals*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|Bullet")
 		float Damage = 10;
+	/*Sphere Collision*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|Bullet")
 		USphereComponent * SphereCollision;
 	

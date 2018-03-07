@@ -46,18 +46,22 @@ private:
 	/** Behavior tree. */
 	UPROPERTY(EditAnywhere, Category = "Platformer|IA")
 		UBehaviorTree*           mEnemyBehavior;
+	/*Sensing component to detect the player*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|IA")
 		UPawnSensingComponent*           mPawnSensingComponent;
+	/*points to scout*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|Scout")
 		TArray<ATargetPoint*> TargetPoints;
+	/*Current target point to go*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|Scout")
 		int currentTargetPoint;
-	/** Max distance to do an effective attack. */
+	/** Max distance to do an effective punch. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platformer|Attack", Meta = (AllowPrivateAccess = true), meta = (DisplayName = "DistanceToAttack"))
 		float                    mDistanceToAttack;
-	/** Max distance to do an effective attack. */
+	/** Max distance to do an effective shoot. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platformer|Attack", Meta = (AllowPrivateAccess = true), meta = (DisplayName = "TooNearToShoot"))
 		float                    mDistanceToShoot;
+	/*shoot component*/
 	UPROPERTY(EditAnywhere, Category = "Platformer|Shoot")
 		UShootComponent*mShoot;
 };

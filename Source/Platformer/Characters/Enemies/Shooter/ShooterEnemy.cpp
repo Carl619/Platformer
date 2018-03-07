@@ -7,6 +7,7 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
 #include "Engine/TargetPoint.h"
 #include "../../Components/PunchComponent.h"
+#include "../../Components/LifeComponent.h"
 #include "../IA/Shooter/ShooterAIController.h"
 #include "../../Components/ShootComponent.h"
 #include "../../Player/PlayerCharacter.h"

@@ -5,6 +5,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "../BaseThirdPersonCharacter.h"
+#include "../Enemies/Shooter/ShooterEnemy.h"
 #include "LifeComponent.h"
 
 
@@ -22,6 +23,20 @@ UPunchComponent::UPunchComponent()
 	RightHandCollision->OnComponentBeginOverlap.AddDynamic(this, &UPunchComponent::OnOverlapBeginRightHandCollision);
 
 	DamageImpulseDirection = CreateDefaultSubobject<UArrowComponent>(TEXT("DamageImpulseDirection"));
+	RightHandCollision->SetCollisionProfileName(FName("Custom"));
+	LeftHandCollision->SetCollisionProfileName(FName("Custom"));
+	RightHandCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	LeftHandCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	RightHandCollision->SetCollisionObjectType(ECollisionChannel::ECC_Destructible);
+	LeftHandCollision->SetCollisionObjectType(ECollisionChannel::ECC_Destructible);
+	RightHandCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	LeftHandCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	RightHandCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Overlap);
+	LeftHandCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Overlap);
+	RightHandCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
+	LeftHandCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
+	RightHandCollision->SetSphereRadius(32);
+	LeftHandCollision->SetSphereRadius(32);
 	// ...
 }
 
@@ -42,6 +57,7 @@ void UPunchComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+	/*If the owner have to wait for another punch he will wait*/
 	if(waitForNextPunch>0){
 		if (canPunch == false) {
 			currentWaitForNextPunch += DeltaTime;
@@ -66,17 +82,20 @@ void UPunchComponent::OnOverlapBeginRightHandCollision(UPrimitiveComponent * Ove
 {
 	if ((OtherActor != nullptr) && (OtherActor != GetOwner()) && (OtherComp != nullptr))
 	{
+		/*if the punch is activated the collision will see if the character is a third person character and if it is posiible receive damage and a direction*/
 		if (canPunch) {
-			ABaseThirdPersonCharacter * thirdchara = Cast<ABaseThirdPersonCharacter>(OtherActor);
-			if (thirdchara) {
-				TArray<ULifeComponent*> Comps;
-				thirdchara->GetComponents(Comps);
-				if (Comps.Num() > 0)
-				{
-					Comps[0]->DamageTaken(Damage, DamageImpulseDirection->GetForwardVector());
+			AShooterEnemy * shooter = Cast<AShooterEnemy>(GetOwner());
+			if (!shooter) {
+				ABaseThirdPersonCharacter * thirdchara = Cast<ABaseThirdPersonCharacter>(OtherActor);
+				if (thirdchara) {
+					ULifeComponent* lifeComponent = thirdchara->FindComponentByClass<ULifeComponent>();
+					if (lifeComponent)
+					{
+						lifeComponent->DamageTaken(Damage, DamageImpulseDirection->GetForwardVector());
+					}
 				}
+				canPunch = false;
 			}
-			canPunch = false;
 		}
 	}
 }
@@ -85,17 +104,20 @@ void UPunchComponent::OnOverlapBeginLeftHandCollision(UPrimitiveComponent * Over
 {
 	if ((OtherActor != nullptr) && (OtherActor != GetOwner()) && (OtherComp != nullptr))
 	{
+		/*if the punch is activated the collision will see if the character is a third person character and if it is posiible receive damage and a direction*/
 		if (canPunch) {
-			ABaseThirdPersonCharacter * thirdchara = Cast<ABaseThirdPersonCharacter>(OtherActor);
-			if (thirdchara) {
-				TArray<ULifeComponent*> Comps;
-				thirdchara->GetComponents(Comps);
-				if (Comps.Num() > 0)
-				{
-					Comps[0]->DamageTaken(Damage, DamageImpulseDirection->GetForwardVector());
+			AShooterEnemy * shooter = Cast<AShooterEnemy>(GetOwner());
+			if (!shooter) {
+				ABaseThirdPersonCharacter * thirdchara = Cast<ABaseThirdPersonCharacter>(OtherActor);
+				if (thirdchara) {
+					ULifeComponent* lifeComponent = thirdchara->FindComponentByClass<ULifeComponent>();
+					if (lifeComponent)
+					{
+						lifeComponent->DamageTaken(Damage, DamageImpulseDirection->GetForwardVector());
+					}
 				}
+				canPunch = false;
 			}
-			canPunch = false;
 		}
 	}
 }
@@ -123,6 +145,8 @@ void UPunchComponent::setIsPunching(bool punching)
 
 void UPunchComponent::Punch()
 {
+	
+	/*When the owner is punching the collision of his hands are activated*/
 	if (isPunching == false) {
 		isPunching = true;
 		RightHandCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
@@ -132,6 +156,7 @@ void UPunchComponent::Punch()
 
 void UPunchComponent::StopPunch()
 {
+	/*When the owner is punching the collision of his hands are activated*/
 	if (isPunching == true) {
 		isPunching = false;
 		RightHandCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);

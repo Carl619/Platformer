@@ -9,6 +9,7 @@
 #include "Engine/TargetPoint.h"
 #include "../../Components/PunchComponent.h"
 #include "../IA/Trapper/TrapperAIController.h"
+#include "../../Components/LifeComponent.h"
 #include "../../Components/ShootComponent.h"
 #include "../../Player/PlayerCharacter.h"
 #include "../../../traps/EnemyTraps/BaseTrap.h"
